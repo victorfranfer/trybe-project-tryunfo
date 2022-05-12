@@ -2,24 +2,28 @@ import React from 'react';
 import Form from './components/Form';
 
 class App extends React.Component {
-  // state = {
-  //   name: '',
-  //   description: '',
-  //   attack: '',
-  //   defense: '',
-  //   speed: '',
-  //   rarity: '',
-  //   superTriumph: false,
-  // }
-
-  handleChange(event) {
-    const { target: { value, name } } = event;
-    this.setState({ [name]: value });
+  state = {
+    cardName: '',
+    cardDescription: '',
+    attack: '',
+    defense: '',
+    speed: '',
+    rarity: 'normal',
+    superTriumph: false,
+    isSaveButtonDisabled: true,
   }
 
-  // handleRarityChange(event) {
-  //   this.setState({ [name]: optionState });
-  // }
+  onInputChange(event) {
+    const { target: { value, name } } = event;
+    const elementValue = target.type === 'checkbox' ? target.checked : value;
+    this.setState({ isSaveButtonDisabled: false });
+    this.setState({ [name]: elementValue });
+  }
+
+  onSaveButtonClick = () => {
+    const newCards = { ...this.state };
+    delete newCards.cards;
+  }
 
   // handleSuperTriumph(event) {
   //   let { target: { value } } = event;
