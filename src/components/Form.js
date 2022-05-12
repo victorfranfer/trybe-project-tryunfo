@@ -5,6 +5,7 @@ class Form extends React.Component {
     return (
       <section>
         <input type='text' data-testid="name-input"></input>
+        <input type='textarea' data-testid="description-input"></input>
       </section>
     )
   }
