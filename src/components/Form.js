@@ -30,7 +30,7 @@ class Form extends React.Component {
           />
         </label>
         <label htmlFor="attr1-input">
-          Attack
+          Attr1
           <input
             name="attack"
             type="number"
@@ -41,7 +41,7 @@ class Form extends React.Component {
           />
         </label>
         <label htmlFor="attr2-input">
-          Defense
+          Attr2
           <input
             name="defense"
             type="number"
@@ -52,7 +52,7 @@ class Form extends React.Component {
           />
         </label>
         <label htmlFor="attr3-input">
-          Speed
+          Attr3
           <input
             name="speed"
             type="number"
