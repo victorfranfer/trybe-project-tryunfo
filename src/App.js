@@ -95,6 +95,20 @@ class App extends React.Component {
     });
   }
 
+  deleteCardFromDeck = ({ target }) => {
+    const { deck } = this.state;
+    const updateDeck = deck.filter((card) => card.name !== target.name);
+
+    const deleteCard = deck.find((card) => card.name === target.name);
+
+    if (deleteCard.trunfo) {
+      this.setState({ hasTrunfo: false });
+    }
+    this.setState({
+      deck: updateDeck,
+    });
+  }
+
   render() {
     const {
       cardName,
@@ -107,6 +121,7 @@ class App extends React.Component {
       cardTrunfo,
       hasTrunfo,
       isSaveButtonDisabled,
+      deck,
       // disableFilter,
       // rareFilter,
     } = this.state;
@@ -137,6 +152,28 @@ class App extends React.Component {
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
         />
+        { deck.map((card) => (
+          <li key={ card.cardName }>
+            <Card
+              cardName={ card.cardName }
+              cardDescription={ card.cardDescription }
+              cardAttr1={ card.cardAttr1 }
+              cardAttr2={ card.cardAttr2 }
+              cardAttr3={ card.cardAttr3 }
+              cardImage={ card.cardImage }
+              cardRare={ card.cardRare }
+              cardTrunfo={ card.cardTrunfo }
+            />
+            <button
+              type="button"
+              data-testid="delete-button"
+              name={ cardName }
+              onClick={ this.deleteCardFromDeck }
+            >
+              Excluir
+            </button>
+          </li>
+        ))}
       </div>
     );
   }
