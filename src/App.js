@@ -18,7 +18,7 @@ class App extends React.Component {
   }
 
   onInputChange = ({ target }) => {
-    console.log(target.name);
+    // console.log(target.name);
     const { name } = target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     this.setState({ [name]: value }, this.validadeSaveButton);
@@ -30,7 +30,8 @@ class App extends React.Component {
   //   delete newCards.deck;
   // }
 
-  saveButtonClick = () => {
+  onSaveButtonClick = () => {
+    // console.log(cardName);
     this.setState(({
       cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3,
       cardImage, cardRare, cardTrunfo, deck }) => ({
@@ -40,7 +41,7 @@ class App extends React.Component {
       cardAttr2: '0',
       cardAttr3: '0',
       cardImage: '',
-      cardRare: '',
+      cardRare: 'normal',
       deck: [...deck, {
         cardName,
         cardDescription,
