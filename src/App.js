@@ -13,7 +13,7 @@ class App extends React.Component {
     cardRare: 'normal',
     cardTrunfo: false,
     hasTrunfo: false,
-    // isSaveButtonDisabled: true,
+    isSaveButtonDisabled: true,
     deck: [],
   }
 
@@ -21,14 +21,8 @@ class App extends React.Component {
     console.log(target.name);
     const { name } = target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
-    this.setState({ [name]: value });
+    this.setState({ [name]: value }, this.validadeSaveButton);
   }
-
-  // onInputChange(event) {
-  //   const { value } = event.target;
-  //   const { name } = event.target;
-  //   this.setState({ [name]: value });
-  // }
 
   // onSaveButtonClick = () => {
   //   const newCards = { ...this.state };
@@ -63,6 +57,43 @@ class App extends React.Component {
     if (cardTrunfo) this.setState(() => ({ hasTrunfo: true }));
   };
 
+  validadeSaveButton = () => {
+    const {
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardName,
+      cardDescription,
+      cardImage,
+      cardRare,
+    } = this.state;
+    const atributeMaxValue = 90;
+    const sumTotalValueAtr = 210;
+
+    const atribute1 = Number(cardAttr1);
+    const atribute2 = Number(cardAttr2);
+    const atribute3 = Number(cardAttr3);
+
+    const aux1 = ((atribute1 >= 0) && (atribute1 <= atributeMaxValue));
+    const aux2 = ((atribute2 >= 0) && (atribute2 <= atributeMaxValue));
+    const aux3 = ((atribute3 >= 0) && (atribute3 <= atributeMaxValue));
+    const aux4 = ((atribute1 + atribute2 + atribute3) <= sumTotalValueAtr);
+    const aux5 = (
+      (cardName.length > 0)
+       && (cardDescription.length > 0)
+       && (cardImage.length > 0)
+       && (cardRare.length > 0)
+    );
+    if (aux1 && aux2 && aux3 && aux4 && aux5) {
+      return this.setState({
+        isSaveButtonDisabled: false,
+      });
+    }
+    return this.setState({
+      isSaveButtonDisabled: true,
+    });
+  }
+
   render() {
     const {
       cardName,
@@ -74,6 +105,7 @@ class App extends React.Component {
       cardRare,
       cardTrunfo,
       hasTrunfo,
+      isSaveButtonDisabled,
       // disableFilter,
       // rareFilter,
     } = this.state;
